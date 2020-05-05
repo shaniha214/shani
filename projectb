@@ -1,0 +1,69 @@
+#include "stdio.h"
+#include "stdlib.h"
+#define N 2
+#define M 2
+char board[N][M];
+typedef char boardPos[2];
+typedef struct _move {
+	char rows, cols;
+} Move;
+typedef struct _movesArray {
+	unsigned int size;
+	Move *moves;
+} movesArray;
+typedef struct _boardPosArray {
+	unsigned int size;
+	boardPos *positions;
+} boardPosArray;
+
+char findC(char n);
+boardPosArray ** validMoves(movesArray **moves, char **board);
+
+
+void main() {
+	boardPosArray **res_array;
+	int i, j,l,size;
+	int board[N][M];
+	movesArray moves[N][M];
+	Move* pos;
+    int cols,rows;
+	for (i = 0; i < M; i++)
+	{
+		printf("enter 4 times * or space\n");
+		for (j = 0; j < N; j++)
+		{
+			
+			scanf("%c", &board[i][j]);
+		}
+	}
+	
+	
+	for (i = 0; i < M; i++)
+	{
+		
+		for (j = 0; j < N; j++)
+		{
+		printf("enter size of moves\n");
+		scanf("%d", &size);
+		moves[i][j].size = size;
+		pos = (Move*)malloc(sizeof(Move)*size);
+		printf(" enter num available moved of cols ard rows %d times\n",size);
+			for ( l = 0; l < size; l++)
+			{
+				printf("cols:");
+                scanf("%d", &cols);
+				printf("rows:");
+				scanf("%d", &rows);
+				 
+				pos[l].cols = cols+'0';
+				
+				pos[l].rows = rows+'0';
+				
+			}
+			moves[i][j].moves = pos;
+			printf("%c%c", moves[i][j].moves[0].cols, moves[i][j].moves[0].rows);
+		}
+	}
+	
+	res_array=validMoves(moves, board);
+}
